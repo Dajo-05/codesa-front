@@ -1,3 +1,67 @@
+# Codesa Front
+
+Proyecto frontend Angular para la aplicación Codesa. Esta aplicación proporciona una interfaz simple para autenticación, gestión de proyectos y tareas.
+
+## Estado
+- Framework: Angular
+- Lenguaje: TypeScript
+
+## Requisitos
+- Node.js >= 14
+- npm >= 6
+
+## Instalación
+1. Clona el repositorio:
+
+   git clone <repo-url>
+2. Entra en el directorio del proyecto:
+
+   cd codesa-front
+3. Instala dependencias:
+
+   npm install
+
+## Desarrollo
+
+Inicia el servidor de desarrollo (por defecto en http://localhost:4200):
+
+```bash
+npm start
+```
+
+## Estructura principal
+
+- `src/app`: código de la aplicación
+  - `pages/login`: componente de login
+  - `pages/proyectos`: lista de proyectos
+  - `pages/tareas`: lista y detalle de tareas
+  - `services`: servicios para `auth`, `proyecto` y `tarea`
+  - `models`: modelos `auth`, `proyecto`, `tarea`
+  - `interceptors`: `auth.interceptor.ts` para añadir token a peticiones
+  - `guards`: `auth.guard.ts` para proteger rutas
+
+## Configuración de proxy (API)
+El proyecto incluye `proxy.conf.json` para redirigir llamadas API en desarrollo. Ajusta la URL del backend según corresponda.
+
+## Tests
+
+Ejecuta las pruebas con:
+
+```bash
+npm test
+```
+
+## Contribuir
+
+1. Crea una rama con tu feature o fix: `git checkout -b feature/mi-cambio`
+2. Haz commits claros y descriptivos.
+3. Abre un Pull Request describiendo los cambios.
+
+## Licencia
+Indica aquí la licencia del proyecto (p. ej. MIT) o añade un archivo `LICENSE` en la raíz.
+
+---
+Si quieres, puedo ampliar este `README.md` con instrucciones de despliegue, variables de entorno necesarias y ejemplos de uso de la API.
 # CodesaFront
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
