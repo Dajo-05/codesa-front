@@ -26,7 +26,7 @@ Proyecto frontend Angular para la aplicación Codesa. Esta aplicación proporcio
 Inicia el servidor de desarrollo (por defecto en http://localhost:4200):
 
 ```bash
-npm start
+ng serve --proxy-config proxy.conf.json   
 ```
 
 ## Estructura principal
@@ -71,7 +71,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 To start a local development server, run:
 
 ```bash
-ng serve
+ng serve --proxy-config proxy.conf.json   
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
