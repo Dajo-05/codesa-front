@@ -1,0 +1,157 @@
+<div class="container mt-4 mb-5">
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary border rounded px-3 mb-4">
+    <span class="navbar-brand fw-bold">Codesa MVP</span>
+
+    <div class="ms-auto d-flex align-items-center gap-3">
+      <span class="text-muted small">
+        {{ usuario?.name }} - {{ usuario?.role }}
+      </span>
+
+      <button class="btn btn-outline-danger btn-sm" (click)="cerrarSesion()">
+        Cerrar sesión
+      </button>
+    </div>
+  </nav>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+      <h1 class="h3 mb-1">Tareas del proyecto</h1>
+
+      <p class="text-muted mb-0" *ngIf="proyecto">
+        {{ proyecto.nombre }} -
+        <span class="badge" [class.bg-success]="proyecto.estado === 'ACTIVE'" [class.bg-secondary]="proyecto.estado === 'ARCHIVED'">
+          {{ proyecto.estado }}
+        </span>
+      </p>
+    </div>
+
+    <button class="btn btn-outline-secondary" (click)="volver()">
+      Volver a proyectos
+    </button>
+  </div>
+
+  <div *ngIf="mensaje" class="alert alert-success">
+    {{ mensaje }}
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <div *ngIf="proyectoArchivado()" class="alert alert-warning">
+    Este proyecto está archivado. No se pueden crear nuevas tareas.
+  </div>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-light">
+      <h2 class="h5 mb-0">Crear tarea</h2>
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="crearTarea()">
+
+        <div class="row g-3">
+
+          <div class="col-md-5">
+            <label class="form-label">Título</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="titulo"
+              [class.is-invalid]="campoInvalido('titulo')"
+              [disabled]="proyectoArchivado()">
+
+            <div class="invalid-feedback">
+              El título es obligatorio y debe tener mínimo 3 caracteres.
+            </div>
+          </div>
+
+          <div class="col-md-7">
+            <label class="form-label">Descripción</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="descripcion"
+              [class.is-invalid]="campoInvalido('descripcion')"
+              [disabled]="proyectoArchivado()">
+
+            <div class="invalid-feedback">
+              La descripción no puede superar 1000 caracteres.
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mt-4">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="proyectoArchivado()">
+            Crear tarea
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-header bg-light d-flex justify-content-between">
+      <h2 class="h5 mb-0">Listado de tareas</h2>
+
+      <span class="badge bg-primary">
+        {{ tareas.length }} tareas
+      </span>
+    </div>
+
+    <div class="card-body">
+
+      <div *ngIf="cargando" class="alert alert-info">
+        Cargando tareas...
+      </div>
+
+      <div *ngIf="!cargando && tareas.length === 0" class="alert alert-warning">
+        No hay tareas registradas para este proyecto.
+      </div>
+
+      <div class="table-responsive" *ngIf="!cargando && tareas.length > 0">
+        <table class="table table-striped table-hover align-middle">
+
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Descripción</th>
+              <th>Estado</th>
+              <th>Proyecto ID</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let tarea of tareas">
+              <td>{{ tarea.id }}</td>
+
+              <td>
+                <strong>{{ tarea.titulo }}</strong>
+              </td>
+
+              <td>{{ tarea.descripcion }}</td>
+
+              <td>
+                <span class="badge bg-secondary">
+                  {{ tarea.estado }}
+                </span>
+              </td>
+
+              <td>{{ tarea.proyectoId }}</td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</div>
